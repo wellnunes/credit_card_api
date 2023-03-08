@@ -6,4 +6,4 @@ from credit_cards.models import CreditCard
 class CreditCardSerializer(serializers.ModelSerializer):
     class Meta:
         model = CreditCard
-        fields = ['exp_date', 'holder', 'number', 'cvv', 'brand']
+        fields = ['id', 'exp_date', 'holder', 'number', 'cvv', 'brand']
