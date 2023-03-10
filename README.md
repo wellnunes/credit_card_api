@@ -22,7 +22,7 @@ Foram implementados alguns testes de models, serializers e views. Para rodar uti
 Clone o repositório
 
 ```bash
-https://github.com/wellnunes/credit_card_api.git
+  git clone https://github.com/wellnunes/credit_card_api.git
 ```
 
 Foram utilizadas algumas libs externas, as quais estão nos 'requirements.txt', portanto é necessário a instalação.
