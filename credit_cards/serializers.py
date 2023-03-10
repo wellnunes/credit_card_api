@@ -1,8 +1,6 @@
 import calendar
 from datetime import datetime
-
 from rest_framework import serializers
-from django.core.signing import Signer
 from django.core.validators import RegexValidator
 from creditcard import CreditCard as CreditCardCheck
 from credit_cards.models import CreditCard
@@ -17,10 +15,10 @@ class CreditCardSerializer(serializers.Serializer):
     brand = serializers.CharField(read_only=True)
 
     def create(self, validated_data):
+        """ when creating, we will check the validity of the date and the credit card, in addition to assigning the
+         corresponding mark and encrypting the cc number when saving in the db """
         credit_card = CreditCardCheck(validated_data.get('number'))
         if credit_card.is_valid():
-            signer = Signer()
-            validated_data['number'] = signer.sign(validated_data['number'])
             validated_data['brand'] = credit_card.get_brand()
             exp_date = validated_data['exp_date']
             if exp_date > datetime.today().date():
