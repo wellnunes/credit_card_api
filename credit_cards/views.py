@@ -1,5 +1,4 @@
-from rest_framework import status, generics, permissions
-from rest_framework.response import Response
+from rest_framework import generics, permissions
 from credit_cards.models import CreditCard
 from credit_cards.serializers import CreditCardSerializer
 
@@ -11,16 +10,9 @@ class CreditCardListView(generics.ListAPIView):
 
 
 class CreditCardCreateView(generics.CreateAPIView):
+    queryset = CreditCard.objects.all()
     serializer_class = CreditCardSerializer
     permission_classes = [permissions.IsAuthenticated]
-
-    def post(self, request, *args, **kwargs):
-        serializer = CreditCardSerializer(data=request.data)
-        if serializer.is_valid():
-            serializer.save()
-            return Response(serializer.data, status=status.HTTP_201_CREATED)
-        else:
-            return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
 
 
 class CreditCardDetailView(generics.RetrieveAPIView):
