@@ -1,13 +1,11 @@
-from rest_framework import routers
-from django.urls import path, include
-
-from credit_cards.views import CreditCardViewSet
-
-router = routers.DefaultRouter()
-router.register('credit_card', CreditCardViewSet)
+from django.urls import path
+from .views import CreditCardCreateView, CreditCardDetailView, CreditCardListView
 
 app_name = 'credit_cards'
 
 urlpatterns = [
-    path('', include(router.urls)),
+    path('credit_card/', CreditCardListView.as_view(), name='credit-card-list'),
+    path('credit_card/<int:pk>/', CreditCardDetailView.as_view(), name='credit-card-detail'),
+    path('credit_card/create/', CreditCardCreateView.as_view(), name='credit-card-create'),
+
 ]
